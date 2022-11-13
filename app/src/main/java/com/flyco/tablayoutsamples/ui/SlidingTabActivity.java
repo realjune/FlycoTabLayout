@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private final String[] mTitles = {
-            "热门", "iOS", "Android"
+            "热门", "iOS", "AndroidAndroidAndroid"
             , "前端", "后端", "设计", "工具资源"
     };
     private MyPagerAdapter mAdapter;
@@ -106,6 +107,27 @@ public class SlidingTabActivity extends AppCompatActivity implements OnTabSelect
 //                tabLayout_7.addNewTab("后端");
 //            }
 //        });
+
+// subscript & superscript
+        tabLayout_4.setScriptText(5, "1234567890");
+        tabLayout_4.setSuperscriptModel(5, false);
+
+        tabLayout_5.setScriptText(5, "1234567890");
+        tabLayout_5.setSuperscriptModel(5, false);
+
+        tabLayout_7.setScriptText(4, "1234567890");
+        tabLayout_7.setSuperscriptModel(4, true);
+        tabLayout_7.setTitleWrapRight(4, 10);
+
+
+        TextView scriptTv = tabLayout_7.getSubscript(5);
+        scriptTv.setTextColor(0xFF443300);
+        tabLayout_7.setScriptText(5, "1234567890");
+        tabLayout_7.setSuperscriptModel(5, false);
+
+
+        tabLayout_7.setScriptText(6, "1234567890");
+        tabLayout_7.setTitleWrapRight(6, 6);
     }
 
     @Override
