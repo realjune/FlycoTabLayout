@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <FrameLayout
+        android:id="@+id/fl_tab_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_tab_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_tab_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="title"
+            android:textColor="#000"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <com.flyco.tablayout.widget.MsgView
+        android:id="@+id/rtv_msg_tip"
+        android:layout_width="20dp"
+        android:layout_height="12dp"
+        android:layout_above="@+id/fl_tab_container"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_toRightOf="@+id/fl_tab_container"
+        android:background="@drawable/two_red"
+        android:gravity="center"
+        android:text="10"
+        android:textColor="#ffffff"
+        android:textSize="10dp"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/rtv_msg_tip_fl"
+        android:layout_width="20dp"
+        android:layout_height="12dp"
+        android:layout_above="@+id/fl_tab_container"
+        android:layout_marginLeft="-15dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_toRightOf="@+id/fl_tab_container"
+        android:background="@drawable/two_red"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/msg_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-1dp"
+            android:text="10"
+            android:textColor="#ffffff"
+            android:textSize="10dp" />
+    </FrameLayout>
+
+</RelativeLayout>

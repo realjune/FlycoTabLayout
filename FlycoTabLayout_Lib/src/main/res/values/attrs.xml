@@ -77,6 +77,14 @@
     <!-- 设置字体全大写 -->
     <attr name="tl_textAllCaps" format="boolean" />
 
+    <attr name="tl_iconsize" format="dimension" />
+    <attr name="tl_indicator_color_other" format="color" />
+    <attr name="tl_indicator_gradient" format="boolean" />
+    <attr name="tl_tab_height" format="dimension" />
+    <attr name="tl_bar_color" format="color" />
+    <attr name="tl_bar_stroke_color" format="color" />
+    <attr name="tl_bar_stroke_width" format="dimension" />
+
     <declare-styleable name="SlidingTabLayout">
         <!-- indicator -->
         <attr name="tl_indicator_color" />
@@ -90,6 +98,8 @@
         <attr name="tl_indicator_gravity" />
         <attr name="tl_indicator_style" />
         <attr name="tl_indicator_width_equal_title" />
+        <attr name="tl_indicator_gradient" />
+        <attr name="tl_indicator_color_other" />
 
         <!-- underline -->
         <attr name="tl_underline_color" />
@@ -105,6 +115,7 @@
         <attr name="tl_tab_padding" />
         <attr name="tl_tab_space_equal" />
         <attr name="tl_tab_width" />
+        <attr name="tl_tab_height" />
 
         <!-- title -->
         <attr name="tl_textsize" />
@@ -112,6 +123,10 @@
         <attr name="tl_textUnselectColor" />
         <attr name="tl_textBold" />
         <attr name="tl_textAllCaps" />
+
+        <attr name="tl_bar_color" />
+        <attr name="tl_bar_stroke_color" />
+        <attr name="tl_bar_stroke_width" />
 
     </declare-styleable>
 
@@ -202,9 +217,9 @@
         <attr name="tl_textBold" />
         <attr name="tl_textAllCaps" />
 
-        <attr name="tl_bar_color" format="color" />
-        <attr name="tl_bar_stroke_color" format="color" />
-        <attr name="tl_bar_stroke_width" format="dimension" />
+        <attr name="tl_bar_color" />
+        <attr name="tl_bar_stroke_color" />
+        <attr name="tl_bar_stroke_width" />
 
     </declare-styleable>
 
@@ -221,5 +236,48 @@
         <attr name="mv_isRadiusHalfHeight" format="boolean" />
         <!-- 圆角矩形宽高相等,取较宽高中大值-->
         <attr name="mv_isWidthHeightEqual" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="SlidingTabLayoutEx">
+        <!-- indicator -->
+        <attr name="tl_indicator_color" />
+        <attr name="tl_indicator_height" />
+        <attr name="tl_indicator_width" />
+        <attr name="tl_indicator_margin_left" />
+        <attr name="tl_indicator_margin_top" />
+        <attr name="tl_indicator_margin_right" />
+        <attr name="tl_indicator_margin_bottom" />
+        <attr name="tl_indicator_corner_radius" />
+        <attr name="tl_indicator_gravity" />
+        <attr name="tl_indicator_style" />
+        <attr name="tl_indicator_width_equal_title" />
+        <attr name="tl_indicator_gradient" />
+        <attr name="tl_indicator_color_other" />
+
+        <!-- underline -->
+        <attr name="tl_underline_color" />
+        <attr name="tl_underline_height" />
+        <attr name="tl_underline_gravity" />
+
+        <!-- divider -->
+        <attr name="tl_divider_color" />
+        <attr name="tl_divider_width" />
+        <attr name="tl_divider_padding" />
+
+        <!-- tab -->
+        <attr name="tl_tab_padding" />
+        <attr name="tl_tab_space_equal" />
+        <attr name="tl_tab_width" />
+        <attr name="tl_tab_height" />
+
+        <!-- title -->
+        <attr name="tl_textsize" />
+        <attr name="tl_iconsize" />
+        <attr name="tl_textSelectColor" />
+        <attr name="tl_textUnselectColor" />
+        <attr name="tl_textBold" />
+        <attr name="tl_textAllCaps" />
+
     </declare-styleable>
 </resources>
