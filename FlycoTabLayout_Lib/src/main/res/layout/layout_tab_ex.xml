@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
@@ -16,7 +17,11 @@
             android:id="@+id/iv_tab_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:background="#998800"
+            tools:layout_height="80dp"
+            tools:layout_width="80dp"
+            tools:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_tab_title"
@@ -26,7 +31,9 @@
             android:singleLine="true"
             android:text="title"
             android:textColor="#000"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:layout_gravity="center"
+            tools:visibility="visible" />
     </FrameLayout>
 
     <com.flyco.tablayout.widget.MsgView
@@ -42,7 +49,7 @@
         android:text="10"
         android:textColor="#ffffff"
         android:textSize="10dp"
-        android:visibility="visible" />
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/rtv_msg_tip_fl"
@@ -66,5 +73,17 @@
             android:textColor="#ffffff"
             android:textSize="10dp" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_tab_subscript"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fl_tab_container"
+        android:layout_toRightOf="@id/fl_tab_container"
+        android:gravity="bottom"
+        android:singleLine="true"
+        android:textSize="8sp"
+        tools:background="#443322"
+        tools:text="Android" />
 
 </RelativeLayout>
