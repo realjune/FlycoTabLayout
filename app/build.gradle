@@ -26,4 +26,6 @@ dependencies {
     implementation support.design
     implementation project(':FlycoTabLayout_Lib')
 //    implementation 'io.github.h07000223:flycoTabLayout:3.0.0'
+//    api(name: 'flycotablayout_lib_2.1.3', ext: 'aar')
+    implementation fresco.fresco
 }

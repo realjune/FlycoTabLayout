@@ -10,12 +10,13 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.flyco.tablayoutsamples.adapter.SimpleHomeAdapter;
 
 public class SimpleHomeActivity extends AppCompatActivity {
     private Context mContext = this;
-    private final String[] mItems = {"SlidingTabLayout", "CommonTabLayout", "SegmentTabLayout"};
-    private final Class<?>[] mClasses = {SlidingTabActivity.class, CommonTabActivity.class,
+    private final String[] mItems = {"SlidingTabLayout", "SlidingTabExLayout", "CommonTabLayout", "SegmentTabLayout"};
+    private final Class<?>[] mClasses = {SlidingTabActivity.class, SlidingTabExActivity.class, CommonTabActivity.class,
             SegmentTabActivity.class};
 
     @Override
@@ -35,5 +36,6 @@ public class SimpleHomeActivity extends AppCompatActivity {
         });
 
         setContentView(lv);
+        Fresco.initialize(this);
     }
 }
