@@ -30,7 +30,7 @@ dependencies {
     implementation support.v4
     implementation support.design
 //    implementation "com.qiyi.video.allclassesx:basecore_lib:${ALLCLASSESX_VERSION}"
-    implementation "com.facebook.fresco:fresco:+"
+    implementation fresco.fresco
 }
 
 buildscript {

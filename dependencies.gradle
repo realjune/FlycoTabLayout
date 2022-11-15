@@ -7,6 +7,7 @@ ext {
     versionName = '1.0.0'
 
     lifecycle_version = '2.3.1'
+    fresco_version = '+'
 
     support = [
             'v4'                    : "androidx.legacy:legacy-support-v4:1.0.0",
@@ -23,5 +24,9 @@ ext {
             'lifecycle'             : "androidx.lifecycle:lifecycle-runtime:$lifecycle_version",
             'lifecycle-ktx'         : "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version",
             'lifecycle-process'     : "androidx.lifecycle:lifecycle-process:$lifecycle_version",
+    ]
+
+    fresco = [
+            'fresco'                : "com.facebook.fresco:fresco:$fresco_version"
     ]
 }
