@@ -28,5 +28,6 @@ ext {
 
     fresco = [
             'fresco'                : "com.facebook.fresco:fresco:$fresco_version"
+//            'fresco'                : "com.qiyi.video.allclassesx:basecore_lib:${ALLCLASSESX_VERSION}"
     ]
 }
