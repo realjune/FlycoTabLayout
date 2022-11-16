@@ -81,8 +81,8 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
     // show MsgTipView
     private Paint mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private SparseArray<Boolean> mInitSetMap = new SparseArray<>();
-    // 非对称右边距
-    private SparseArray<Integer> mTitleWrapRight = new SparseArray<>();
+    // 上下标数据
+    private SparseArray<ScriptInfo> mTitleWrapRight = new SparseArray<>();
     private float margin;
     private float marginRight;
 
@@ -125,6 +125,15 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
     private int mTextUnselectColor;
     private int mTextBold;
     private boolean mTextAllCaps;
+
+    /** script */
+    private float mScriptTextSize;
+    private int mScriptTextSelectColor;
+    private int mScriptTextUnselectColor;
+    private int mScriptMarginLeft;
+    private int mScriptTopOut;
+    private int mScriptMarginRight;
+    private int mScriptBottomOut;
 
     private int mLastScrollX;
     private int mHeight;
@@ -209,6 +218,23 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
         this.mIndicatorColorOther = ta.getColor(styleable.SlidingTabLayoutEx_tl_indicator_color_other, this.mIndicatorColor);
         this.mIconSize = ta.getDimension(styleable.SlidingTabLayoutEx_tl_textsize, (float) this.sp2px(15.0F));
         this.mTabHeight = ta.getDimension(styleable.SlidingTabLayoutEx_tl_tab_height, (float) this.dp2px(-1.0F));
+
+        // <!-- scriptText-上下标 -->
+        // <!-- 设置上下标字体大小 -->
+        mScriptTextSize = ta.getDimension(styleable.SlidingTabLayoutEx_tl_script_textsize, sp2px(11));
+        // <!-- 设置上下标字体选中颜色 -->
+        mScriptTextSelectColor = ta.getColor(styleable.SlidingTabLayoutEx_tl_script_textSelectColor, mTextSelectColor);
+        // <!-- 设置上下标字体未选中颜色 -->
+        mScriptTextUnselectColor = ta.getColor(styleable.SlidingTabLayoutEx_tl_script_textUnselectColor,
+                mTextUnselectColor);
+        // <!-- 设置上下标左间距 -->
+        mScriptMarginLeft = ta.getDimensionPixelSize(styleable.SlidingTabLayoutEx_tl_script_marginLeft, 0);
+        // <!-- 设置上下标左间距 -->
+        mScriptTopOut = ta.getDimensionPixelSize(styleable.SlidingTabLayoutEx_tl_script_topOut, 0);
+        // <!-- 设置上下标上间距 -->
+        mScriptMarginRight = ta.getDimensionPixelSize(styleable.SlidingTabLayoutEx_tl_script_marginRight, 0);
+        // <!-- 设置上下标下间距 -->
+        mScriptBottomOut = ta.getDimensionPixelSize(styleable.SlidingTabLayoutEx_tl_script_bottomOut, 0);
         ta.recycle();
     }
 
@@ -564,6 +590,11 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
                     iv_tab_icon.setLayoutParams(imageParam);
                 }
             }
+            TextView scriptTv = v.findViewById(id.tv_tab_subscript);
+            if (scriptTv != null) {
+                scriptTv.setTextSize(TypedValue.COMPLEX_UNIT_PX, mScriptTextSize);
+                scriptTv.setTextColor(i == mCurrentTab ? mScriptTextSelectColor : mScriptTextUnselectColor);
+            }
         }
     }
 
@@ -626,6 +657,11 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
                 if (mTextBold == TEXT_BOLD_WHEN_SELECT) {
                     tab_title.getPaint().setFakeBoldText(isSelect);
                 }
+            }
+
+            TextView scriptTv = tabView.findViewById(id.tv_tab_subscript);
+            if (scriptTv != null) {
+                scriptTv.setTextColor(isSelect ? mScriptTextSelectColor : mScriptTextUnselectColor);
             }
         }
     }
@@ -921,8 +957,16 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
         invalidate();
     }
 
+    public void setScriptTextSize(float textSize) {
+        this.mScriptTextSize = textSize;
+    }
+
     public void setTextsize(float textsize) {
-        this.mTextsize = sp2px(textsize);
+        setTextsizePx(sp2px(textsize));
+    }
+
+    public void setTextsizePx(float textsize) {
+        this.mTextsize = textsize;
         updateTabStyles();
     }
 
@@ -1124,8 +1168,12 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
         if (script == null) {
             script = "";
         }
+        ScriptInfo info = optScripInfo(position);
+        info.scriptText = script;
         TextView tipView = getSubscript(position);
         tipView.setText(script);
+        setTitleWrapRight(position, mScriptMarginLeft, mScriptMarginRight);
+        updateScriptTopBottomOut(tipView, info.isSuperScript);
     }
 
     /**
@@ -1135,6 +1183,8 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
         if (position >= mTabCount) {
             position = mTabCount - 1;
         }
+        ScriptInfo info = optScripInfo(position);
+        info.isSuperScript = superscript;
 
         View tabView = mTabsContainer.getChildAt(position);
         TextView tipView = tabView.findViewById(R.id.tv_tab_subscript);
@@ -1158,8 +1208,39 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
                 }
             }
             tipView.setLayoutParams(lp);
+            updateScriptTopBottomOut(tipView, info.isSuperScript);
         }
-        setTitleWrapRight(position, 0);
+    }
+
+    /**
+     * 更新上下标位置
+     */
+    private void updateScreiptTopBottomOut() {
+        ScriptInfo info = null;
+        int k;
+        TextView tv;
+        for (int i = 0; i < mTitleWrapRight.size(); i++) {
+            k = mTitleWrapRight.keyAt(i);
+            tv = getSubscript(k);
+            if (tv != null && tv.getVisibility() == VISIBLE && tv.getText().length() > 0) {
+                info = mTitleWrapRight.valueAt(i);
+                updateScriptTopBottomOut(tv, info.isSuperScript);
+            }
+        }
+    }
+
+    /**
+     * 更新上下标位置
+     *
+     * @param scriptView
+     * @param isSuperScript
+     */
+    private void updateScriptTopBottomOut(View scriptView, boolean isSuperScript) {
+        if (isSuperScript) {
+            scriptView.setTranslationY(-mScriptTopOut);
+        } else {
+            scriptView.setTranslationY(mScriptBottomOut);
+        }
     }
 
     /**
@@ -1189,45 +1270,61 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
             return false;
         }
         TextView tipView = tabView.findViewById(R.id.tv_tab_subscript);
-        return tipView != null && tipView.getVisibility() != View.GONE && tipView.getText().length() > 0;
+        return tipView != null && tipView.getVisibility() != View.GONE && tipView.getWidth() > 0;
     }
 
-    public void setTitleWrapRight(int position, float dp) {
-        setTitleWrapRight(position, dp, 0);
+    private ScriptInfo optScripInfo(int position) {
+        ScriptInfo last = mTitleWrapRight.get(position);
+        if (last == null) {
+            last = new ScriptInfo();
+            mTitleWrapRight.put(position, last);
+        }
+        return last;
+    }
+
+    public void setScriptTopOut(int topOut) {
+        this.mScriptTopOut = topOut;
+        updateScreiptTopBottomOut();
+    }
+
+    public void setScriptBottomOut(int bottomOut) {
+        this.mScriptBottomOut = bottomOut;
+        updateScreiptTopBottomOut();
     }
 
     /**
-     * 设置个别title的右边距
+     * 设置个别title的左右边距
      *
-     * @param dp 编辑，单位dp
+     * @param marginLeft  左边距，单位px
+     * @param marginRight 右边距，单位px
      */
-    public void setTitleWrapRight(int position, float dp, float marginRight) {
-        if (position >= mTabCount) {
-            position = mTabCount - 1;
+    public void setTitleWrapRight(int position, int marginLeft, int marginRight) {
+        ScriptInfo last = mTitleWrapRight.get(position);
+        if (last == null) {
+            last = new ScriptInfo();
+            mTitleWrapRight.put(position, last);
         }
+        last.marginLeft = marginLeft;
+        last.marginRight = marginRight;
 
-        int px = dp2px(dp);
-        int marginRightPx = dp2px(marginRight);
-        Integer last = mTitleWrapRight.get(position);
-        if (last != null && last == px) {
+        View tabV = mTabsContainer.getChildAt(position);
+        if (tabV == null) {
             return;
         }
-        mTitleWrapRight.put(position, px);
-        View v = mTabsContainer.getChildAt(position);
-        View tv_tab_title = v.findViewById(titleViewId);
+        if (last.marginRight != tabV.getPaddingRight()) {
+            tabV.setPadding(tabV.getPaddingLeft(), tabV.getPaddingTop(), last.marginRight, tabV.getPaddingBottom());
+        }
+        View tv_tab_title = tabV.findViewById(titleViewId);
         if (tv_tab_title == null) {
             return;
         }
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) tv_tab_title.getLayoutParams();
-        if (marginRight != v.getPaddingRight()) {
-            v.setPadding(v.getPaddingLeft(), v.getPaddingTop(), marginRightPx, v.getPaddingBottom());
-        }
-        if (dp >= 0) {
+        if (last.marginLeft >= 0) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 lp.removeRule(RelativeLayout.CENTER_IN_PARENT);
                 lp.addRule(RelativeLayout.CENTER_VERTICAL);
                 lp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-                tv_tab_title.setPadding(tv_tab_title.getPaddingLeft(), 0, px, 0);
+                tv_tab_title.setPadding(tv_tab_title.getPaddingLeft(), 0, last.marginLeft, 0);
             }
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -1410,12 +1507,12 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
         super.onRestoreInstanceState(state);
     }
 
-    protected int dp2px(float dp) {
+    public int dp2px(float dp) {
         final float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 
-    protected int sp2px(float sp) {
+    public int sp2px(float sp) {
         final float scale = this.mContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * scale + 0.5f);
     }

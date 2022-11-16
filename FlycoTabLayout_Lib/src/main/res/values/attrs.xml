@@ -33,6 +33,9 @@
     <attr name="tl_indicator_anim_duration" format="integer" />
     <!-- 设置显示器支持动画回弹效果-->
     <attr name="tl_indicator_bounce_enable" format="boolean" />
+    <attr name="tl_indicator_color_other" format="color" />
+    <!-- 指示器的渐变色 -->
+    <attr name="tl_indicator_gradient" format="boolean" />
 
     <!-- underline -->
     <!-- 设置下划线颜色 -->
@@ -60,6 +63,7 @@
     <attr name="tl_tab_space_equal" format="boolean" />
     <!-- 设置tab固定大小 -->
     <attr name="tl_tab_width" format="dimension" />
+    <attr name="tl_tab_height" format="dimension" />
 
     <!-- title -->
     <!-- 设置字体大小 -->
@@ -78,12 +82,25 @@
     <attr name="tl_textAllCaps" format="boolean" />
 
     <attr name="tl_iconsize" format="dimension" />
-    <attr name="tl_indicator_color_other" format="color" />
-    <attr name="tl_indicator_gradient" format="boolean" />
-    <attr name="tl_tab_height" format="dimension" />
     <attr name="tl_bar_color" format="color" />
     <attr name="tl_bar_stroke_color" format="color" />
     <attr name="tl_bar_stroke_width" format="dimension" />
+
+    <!-- scriptText-上下标 -->
+    <!-- 设置上下标字体大小 -->
+    <attr name="tl_script_textsize" format="dimension" />
+    <!-- 设置上下标字体选中颜色 -->
+    <attr name="tl_script_textSelectColor" format="color" />
+    <!-- 设置上下标字体未选中颜色 -->
+    <attr name="tl_script_textUnselectColor" format="color" />
+    <!-- 设置上下标左间距 -->
+    <attr name="tl_script_marginLeft" format="dimension" />
+    <!-- 设置上下标左间距 -->
+    <attr name="tl_script_marginRight" format="dimension" />
+    <!-- 设置上下标上间距 -->
+    <attr name="tl_script_topOut" format="dimension" />
+    <!-- 设置上下标下间距 -->
+    <attr name="tl_script_bottomOut" format="dimension" />
 
     <declare-styleable name="SlidingTabLayout">
         <!-- indicator -->
@@ -127,6 +144,22 @@
         <attr name="tl_bar_color" />
         <attr name="tl_bar_stroke_color" />
         <attr name="tl_bar_stroke_width" />
+
+        <!-- scriptText-上下标 -->
+        <!-- 设置上下标字体大小 -->
+        <attr name="tl_script_textsize" />
+        <!-- 设置上下标字体选中颜色 -->
+        <attr name="tl_script_textSelectColor" />
+        <!-- 设置上下标字体未选中颜色 -->
+        <attr name="tl_script_textUnselectColor" />
+        <!-- 设置上下标左间距 -->
+        <attr name="tl_script_marginLeft" />
+        <!-- 设置上下标左间距 -->
+        <attr name="tl_script_marginRight" />
+        <!-- 设置上下标上间距 -->
+        <attr name="tl_script_topOut" />
+        <!-- 设置上下标下间距 -->
+        <attr name="tl_script_bottomOut" />
 
     </declare-styleable>
 
@@ -238,7 +271,6 @@
         <attr name="mv_isWidthHeightEqual" format="boolean" />
     </declare-styleable>
 
-
     <declare-styleable name="SlidingTabLayoutEx">
         <!-- indicator -->
         <attr name="tl_indicator_color" />
@@ -278,6 +310,22 @@
         <attr name="tl_textUnselectColor" />
         <attr name="tl_textBold" />
         <attr name="tl_textAllCaps" />
+
+        <!-- scriptText-上下标 -->
+        <!-- 设置上下标字体大小 -->
+        <attr name="tl_script_textsize" />
+        <!-- 设置上下标字体选中颜色 -->
+        <attr name="tl_script_textSelectColor" />
+        <!-- 设置上下标字体未选中颜色 -->
+        <attr name="tl_script_textUnselectColor" />
+        <!-- 设置上下标左间距 -->
+        <attr name="tl_script_marginLeft" />
+        <!-- 设置上下标左间距 -->
+        <attr name="tl_script_marginRight" />
+        <!-- 设置上下标上间距 -->
+        <attr name="tl_script_topOut" />
+        <!-- 设置上下标下间距 -->
+        <attr name="tl_script_bottomOut" />
 
     </declare-styleable>
 </resources>

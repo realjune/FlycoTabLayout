@@ -41,6 +41,8 @@
                 tl:tl_indicator_height="1.5dp"
                 tl:tl_indicator_width_equal_title="true"
                 tl:tl_tab_padding="22dp"
+                tl:tl_script_marginTop="6dp"
+                tl:tl_script_marginBottom="6dp"
                 tl:tl_tab_space_equal="true"
                 tl:tl_textSelectColor="#000000"
                 tl:tl_textUnselectColor="#66000000"
@@ -53,6 +55,8 @@
                 android:layout_height="48dp"
                 android:background="#3F9FE0"
                 tl:tl_textAllCaps="true"
+                tl:tl_script_marginLeft="4dp"
+                tl:tl_script_textsize="8dp"
                 tl:tl_textBold="BOTH"
                 tl:tl_textsize="14sp"/>
 
@@ -62,6 +66,7 @@
                 android:layout_height="48dp"
                 android:background="#009688"
                 tl:tl_tab_padding="0dp"
+                tl:tl_script_marginRight="4dp"
                 tl:tl_tab_width="95dp"
                 tl:tl_textsize="15sp"/>
 
