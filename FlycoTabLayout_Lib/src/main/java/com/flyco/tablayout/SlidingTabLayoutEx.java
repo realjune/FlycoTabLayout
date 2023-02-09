@@ -345,12 +345,6 @@ public class SlidingTabLayoutEx extends HorizontalScrollView implements ViewPage
                 addTab(i, pageTitle.toString(), tabView);
             }
         }
-
-        if (isNewLogic) {
-            View placeHoder = new View(mContext);
-            LayoutParams lp_tab = new LayoutParams(dp2px(40.0F), -1);
-            mTabsContainer.addView(placeHoder, lp_tab);
-        }
         updateTabStyles();
     }
 
